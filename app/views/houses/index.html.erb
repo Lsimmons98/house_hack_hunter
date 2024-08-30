@@ -1,7 +1,7 @@
 <h1> All Houses </h1>
 
 <% @houses.each do |house| %>
-  <h3><%= house.address %><br></h3>
+  <h3><%= link_to house.address, house_path(house) %><br></h3>
     <ul>
       <li>List Price: $<%= house.list_price %></li>
       <li>Year Built: <%= house.year_built %></li>
