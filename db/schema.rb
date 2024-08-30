@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_30_133813) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_30_171803) do
+  create_table "deals", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "house_id"
+    t.decimal "interest_rate", precision: 5, scale: 2
+    t.decimal "down_payment_percentage", precision: 5, scale: 2
+    t.decimal "purchase_price", precision: 12, scale: 2
+    t.integer "loan_term_years"
+    t.decimal "rehab_cost", precision: 12, scale: 2
+    t.decimal "holding_cost", precision: 12, scale: 2
+    t.decimal "utilities", precision: 12, scale: 2
+    t.decimal "lawn_care", precision: 12, scale: 2
+    t.decimal "insurance", precision: 12, scale: 2
+    t.decimal "vacancy", precision: 5, scale: 2
+    t.decimal "maintenance", precision: 5, scale: 2
+    t.decimal "capital_expenditure", precision: 5, scale: 2
+    t.decimal "property_management", precision: 5, scale: 2
+    t.decimal "closing_costs", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["house_id"], name: "index_deals_on_house_id"
+    t.index ["user_id"], name: "index_deals_on_user_id"
+  end
+
+  create_table "houses", force: :cascade do |t|
+    t.string "address"
+    t.decimal "list_price", precision: 12, scale: 2
+    t.decimal "annual_property_taxes", precision: 10, scale: 2
+    t.integer "year_built"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.integer "house_id"
+    t.integer "bedrooms"
+    t.integer "bathrooms"
+    t.decimal "monthly_rent", precision: 12, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["house_id"], name: "index_units_on_house_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -23,4 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_133813) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "deals", "houses"
+  add_foreign_key "deals", "users"
+  add_foreign_key "units", "houses"
 end
