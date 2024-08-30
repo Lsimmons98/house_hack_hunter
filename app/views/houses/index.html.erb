@@ -1,0 +1,36 @@
+<h1> All Houses </h1>
+
+<% @houses.each do |house| %>
+  <h3><%= house.address %><br></h3>
+    <ul>
+      <li>List Price: $<%= house.list_price %></li>
+      <li>Year Built: <%= house.year_built %></li>
+    </ul>
+  <% end %>
+
+<h2> Add New House </h2>
+<%= form_with(model: @house, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :list_price %>
+    <%= f.number_field :list_price, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :annual_property_taxes %>
+    <%= f.number_field :annual_property_taxes, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year_built %>
+    <%= f.number_field :year_built %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create House" %>
+  </div>
+<% end %>
