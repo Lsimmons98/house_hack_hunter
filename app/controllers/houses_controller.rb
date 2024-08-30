@@ -2,6 +2,7 @@ class HousesController < ApplicationController
   def index
     @houses = House.all
     @house = House.new
+    4.times { @house.units.build }
   end
 
   def show
@@ -23,6 +24,9 @@ class HousesController < ApplicationController
   end
 
   def house_params
-    params.require(:house).permit(:address, :list_price, :annual_property_taxes, :year_built)
+    params.require(:house).permit(
+      :address, :list_price, :annual_property_taxes, :year_built,
+      units_attributes: [:id, :bedrooms, :bathrooms, :monthly_rent, :_destroy]
+    )
   end
 end

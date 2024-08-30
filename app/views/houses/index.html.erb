@@ -29,6 +29,33 @@
     <%= f.label :year_built %>
     <%= f.number_field :year_built %>
   </div>
+  <p>-----------------------------------------------------------------</p>
+
+   <h3>Units</h3>
+  <%= f.fields_for :units do |unit_form| %>
+    <div style="margin-bottom: 20px">
+      <div class="field">
+        <%= unit_form.label :bedrooms, "Number of Bedrooms" %>
+        <%= unit_form.number_field :bedrooms %>
+      </div>
+
+      <div class="field">
+        <%= unit_form.label :bathrooms, "Number of Bathrooms" %>
+        <%= unit_form.number_field :bathrooms %>
+      </div>
+
+      <div class="field">
+        <%= unit_form.label :monthly_rent, "Monthly Rent" %>
+        <%= unit_form.number_field :monthly_rent, step: 0.01 %>
+      </div>
+
+      <div class="field">
+        <%= unit_form.check_box :_destroy %>
+        <%= unit_form.label :_destroy, "Remove Unit" %>
+      </div>
+    </div>
+    <p>-----------------------------------------------------------------</p>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Create House" %>
