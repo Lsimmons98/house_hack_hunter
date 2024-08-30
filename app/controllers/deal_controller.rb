@@ -1,3 +1,0 @@
-class DealController < ApplicationController
-
-end
