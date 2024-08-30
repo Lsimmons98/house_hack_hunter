@@ -1,0 +1,3 @@
+class DealController < ApplicationController
+
+end
