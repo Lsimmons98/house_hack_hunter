@@ -17,83 +17,19 @@
 
 <% if @deal.persisted? %>
   <%= form_with(model: [@house, @deal], local: true) do |f| %>
-    <div class="field">
-      <%= f.label :interest_rate, "Interest Rate (%)" %>
-      <%= f.number_field :interest_rate, step: 0.01 %>
-    </div>
 
-    <div class="field">
-      <%= f.label :down_payment_percentage, "Down Payment (%)" %>
-      <%= f.number_field :down_payment_percentage, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :purchase_price, "Purchase Price" %>
-      <%= f.number_field :purchase_price, value: @deal.purchase_price, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :loan_term_years, "Loan Term (Years)" %>
-      <%= f.number_field :loan_term_years, value: @deal.loan_term_years %>
-    </div>
-
-    <div class="field">
-      <%= f.label :rehab_cost, "Rehab Cost" %>
-      <%= f.number_field :rehab_cost, value: @deal.rehab_cost, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :holding_cost, "Holding Cost" %>
-      <%= f.number_field :holding_cost, value: @deal.holding_cost, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :utilities, "Utilities" %>
-      <%= f.number_field :utilities, value: @deal.utilities, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :lawn_care, "Lawn Care" %>
-      <%= f.number_field :lawn_care, value: @deal.lawn_care, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :insurance, "Insurance" %>
-      <%= f.number_field :insurance, value: @deal.insurance, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :vacancy, "Vacancy (%)" %>
-      <%= f.number_field :vacancy, value: @deal.vacancy, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :maintenance, "Maintenance (%)" %>
-      <%= f.number_field :maintenance, value: @deal.maintenance, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :capital_expenditure, "Capital Expenditure (%)" %>
-      <%= f.number_field :capital_expenditure, value: @deal.capital_expenditure, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :property_management, "Property Management (%)" %>
-      <%= f.number_field :property_management, value: @deal.property_management, step: 0.01 %>
-    </div>
-
-    <div class="field">
-      <%= f.label :closing_costs, "Closing Costs (%)" %>
-      <%= f.number_field :closing_costs, value: @deal.closing_costs, step: 0.01 %>
-    </div>
+    <%= render '/deals/form', f: f %>
 
     <div class="actions">
       <%= f.submit "Update Deal" %>
     </div>
+
   <% end %>
 <% else %>
   <%= form_with(model: [@house, @house.deals.new], local: true) do |f| %>
-    <!-- Same form fields as above -->
+
+    <%= render '/deals/form', f: f %>
+
     <div class="actions">
       <%= f.submit "Create Deal" %>
     </div>
