@@ -7,6 +7,7 @@ class HousesController < ApplicationController
 
   def show
     @house = House.find(params[:id])
+    @deal = @house.deals.find_or_initialize_by(user: current_user)
   end
 
   def new
