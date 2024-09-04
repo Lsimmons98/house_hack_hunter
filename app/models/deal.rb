@@ -6,7 +6,7 @@ class Deal < ApplicationRecord
   scope :for_user, ->(user_id) { where(user_id: user_id).joins(:house) }
 
   def total_cash_needed
-    calculate_total_cash_needed purchase_price, purchase_price
+    calculate_total_cash_needed(purchase_price, purchase_price)
   end
 
   def total_income
@@ -24,7 +24,6 @@ class Deal < ApplicationRecord
     management_amount = property_management * total_income / 100.0
     vacancy_amount + maintenance_amount + capex_amount + management_amount +
     utilities + lawn_care + insurance + house.annual_property_taxes/12.0
-
   end
 
   def monthly_payment
@@ -48,7 +47,10 @@ class Deal < ApplicationRecord
 
     target_return_lower_bound = 7.5
     target_return_upper_bound = 8.5
-    previous_purchase_price = nil
+
+    incremented_up = false
+    incremented_down = false
+
     iterations = 0
 
     loop do
@@ -63,22 +65,22 @@ class Deal < ApplicationRecord
         break
       elsif cash_on_cash_return < target_return_lower_bound
         max_purchase_price -= accuracy
+        incremented_down = true
       else
         max_purchase_price += accuracy
+        incremented_up = true
       end
 
-      if previous_purchase_price && previous_purchase_price == max_purchase_price
+      if incremented_down && incremented_up
         puts "Break 1 (Accuracy not met)"
         break
       end
 
-
       if iterations >= max_iterations
         puts "Break 2 (Max Iterations)"
+        max_purchase_price = 0
         break
       end
-
-      previous_purchase_price = max_purchase_price
     end
 
     max_purchase_price
