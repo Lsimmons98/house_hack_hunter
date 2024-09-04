@@ -1,6 +1,10 @@
 class DealsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @deals = Deal.for_user(current_user.id)
+  end
+
   def new
     @house = House.find(params[:house_id])
     @deal = @house.deals.new

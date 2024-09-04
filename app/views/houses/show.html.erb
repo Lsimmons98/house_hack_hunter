@@ -15,6 +15,17 @@
 
 <h3> Deal </h3>
 
+<% if @deal.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+    <ul>
+      <% @deal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <% if @deal.persisted? %>
   <%= form_with(model: [@house, @deal], local: true) do |f| %>
 
@@ -25,6 +36,17 @@
     </div>
 
   <% end %>
+
+<p>Total Cash Needed: <%= @deal.total_cash_needed%></p>
+<p>Total Income: <%= @deal.total_income %>/month</p>
+<p>Total Expenses: <%= @deal.total_expenses %>/month</p>
+<p>Monthly Payment: <%= @deal.monthly_payment%></p>
+
+<p>Net Operating Income: <%= @deal.net_operating_income %>/month</p>
+<p>Cash Flow: <%= @deal.cash_flow %>/month</p>
+<p>Cash on Cash Return: <%= @deal.cash_on_cash_return %>%</p>
+<p>Max Purchase Price: $<%= @deal.max_purchase_price 1000, 100%></p>
+
 <% else %>
   <%= form_with(model: [@house, @house.deals.new], local: true) do |f| %>
 

@@ -1,3 +1,5 @@
+<h1> <%= link_to "Deals Index Page", deals_path %></h1><br>
+
 <h1> All Houses </h1>
 
 <% @houses.each do |house| %>
@@ -9,6 +11,18 @@
   <% end %>
 
 <h2> Add New House </h2>
+
+<% if @house.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@house.errors.count, "error") %> prohibited this house from being saved:</h2>
+    <ul>
+      <% @house.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: @house, local: true) do |f| %>
   <div class="field">
     <%= f.label :address %>
@@ -34,6 +48,7 @@
    <h3>Units</h3>
   <%= f.fields_for :units do |unit_form| %>
     <div style="margin-bottom: 20px">
+
       <div class="field">
         <%= unit_form.label :bedrooms, "Number of Bedrooms" %>
         <%= unit_form.number_field :bedrooms %>

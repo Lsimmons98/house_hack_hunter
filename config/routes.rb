@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     resources :deals, only: [:new, :create, :edit, :update]
   end
   resources :houses, only: [:index, :show, :new, :create]
+
+  resources :deals, only: [:index]
 end
