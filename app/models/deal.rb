@@ -3,6 +3,12 @@ class Deal < ApplicationRecord
   belongs_to :house
   has_many :units, through: :house
 
+  validates :interest_rate, :down_payment_percentage, :purchase_price,
+  :loan_term_years, :rehab_cost, :holding_cost,
+  :utilities, :lawn_care, :insurance,
+  :vacancy, :maintenance, :capital_expenditure,
+  :property_management, :closing_costs, presence: true
+
   scope :for_user, ->(user_id) { where(user_id: user_id).joins(:house) }
 
   def total_cash_needed
@@ -72,12 +78,10 @@ class Deal < ApplicationRecord
       end
 
       if incremented_down && incremented_up
-        puts "Break 1 (Accuracy not met)"
         break
       end
 
       if iterations >= max_iterations
-        puts "Break 2 (Max Iterations)"
         max_purchase_price = 0
         break
       end
@@ -85,6 +89,16 @@ class Deal < ApplicationRecord
 
     max_purchase_price
   end
+  #
+  # def max_purchase_price a, b
+  #   money_down = down_payment_percentage * purchase_price / 100.0
+  #   monthly_interest_rate = interest_rate / 12.0 / 100.0
+  #   total_payments = loan_term_years * 12
+  #   price = (100 * (money_down - 150 * money_down * monthly_interest_rate) * ((-monthly_interest_rate + 1)**total_payments) -  money_down * ((-monthly_interest_rate + 1)**total_payments) + rehab_cost + holding_cost - (rehab_cost * (-monthly_interest_rate + 1)**total_payments) - (holding_cost * (-monthly_interest_rate + 1)**total_payments))/
+  #   ((-closing_costs) + (closing_costs * (-monthly_interest_rate + 1)**total_payments) - ((15000 * monthly_interest_rate) * (-monthly_interest_rate + 1)**total_payments))
+  #   price
+  # end
+
 
 private
 
