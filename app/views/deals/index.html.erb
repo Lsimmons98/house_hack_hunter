@@ -1,0 +1,11 @@
+<h1> <%= link_to "Houses Index Page", houses_path %></h1><br>
+
+<h1> Your Deals </h1>
+<% @deals.each do |deal| %>
+  <h3><%= link_to deal.house.address, house_path(deal.house) %><br></h3>
+    <ul>
+      <li>List Price: $<%= deal.house.list_price %></li>
+      <li>Max Purchase Price: $<%= deal.max_purchase_price 10000, 15%></li>
+      <li>Year Built: <%= deal.house.year_built %></li>
+    </ul>
+  <% end %>
