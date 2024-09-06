@@ -15,7 +15,7 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/house-hack-hunter.git
+   git clone git@github.com:Lsimmons98/house_hack_hunter.git
    cd house-hack-hunter
    ```
 
@@ -54,7 +54,7 @@ Once you've set up the app and started the server, you can begin using the follo
 ### Creating a Deal
 
 - After creating a house, you can create a deal associated with that house.
-- The deal will calculate key metrics such as cash flow, cash-on-cash return, and net operating income (NOI).
+- The deal will calculate key metrics such as cash flow, cash-on-cash return, net operating income (NOI), and a suggested maximum purchase price.
 
 ## Features
 
@@ -63,29 +63,3 @@ Once you've set up the app and started the server, you can begin using the follo
 - **Financial Calculations**: Automatically calculate key metrics like cash-on-cash return, cash flow, NOI, and monthly payment.
 - **Validation Handling**: Ensures data integrity by validating user input for houses and units.
 - **User-Specific Data**: Deals are scoped to the logged-in user, allowing each user to manage their own properties.
-
-## Validations
-
-### House Validations
-
-- `address`, `list_price`, `annual_property_taxes`, and `year_built` must be present.
-
-### Unit Validations
-
-- Each unit must have `bedrooms`, `bathrooms`, and `monthly_rent`.
-
-### Deal Validations
-
-- Financial calculations are validated based on user inputs and house details.
-
-## Scopes
-
-### `Deal`
-
-- **`good_deals_for_user(user_id)`**: Fetches deals for a specific user where the `max_purchase_price` is within 10% of the house's listing price.
-
-```ruby
-scope :good_deals_for_user, ->(user_id) {
-  joins(:house).where('deals.max_purchase_price BETWEEN houses.list_price * 0.9 AND houses.list_price * 1.1').where(user_id: user_id)
-}
-```

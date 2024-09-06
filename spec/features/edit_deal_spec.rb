@@ -6,9 +6,12 @@ RSpec.feature "Deal Method Recalculation From Edit", type: :feature do
     user = create(:user)
     deal = create(:deal, house: house, user: user)
 
+    sign_in user
+
     visit house_path(house)
+
     fill_in "deal_interest_rate", with: '4.5'
-    click_button 'Calculate'
+    click_button 'Update Deal'
 
     expect(page).to have_content('Max Purchase Price: $')
   end

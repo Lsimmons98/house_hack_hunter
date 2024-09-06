@@ -26,16 +26,9 @@
   </div>
 <% end %>
 
+<%= render '/deals/form' %>
+
 <% if @deal.persisted? %>
-  <%= form_with(model: [@house, @deal], local: true) do |f| %>
-
-    <%= render '/deals/form', f: f %>
-
-    <div class="actions">
-      <%= f.submit "Update Deal" %>
-    </div>
-
-  <% end %>
 
 <p>Total Cash Needed: <%= @deal.total_cash_needed%></p>
 <p>Total Income: <%= @deal.total_income %>/month</p>
@@ -47,13 +40,4 @@
 <p>Cash on Cash Return: <%= @deal.cash_on_cash_return %>%</p>
 <p>Max Purchase Price: $<%= @deal.max_purchase_price 1000, 100%></p>
 
-<% else %>
-  <%= form_with(model: [@house, @house.deals.new], local: true) do |f| %>
-
-    <%= render '/deals/form', f: f %>
-
-    <div class="actions">
-      <%= f.submit "Create Deal" %>
-    </div>
-  <% end %>
 <% end %>
