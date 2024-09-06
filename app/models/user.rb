@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :deals
+  has_many :deals, dependent: :destroy
   has_many :houses, through: :deals
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
