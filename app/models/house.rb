@@ -1,6 +1,6 @@
 class House < ApplicationRecord
   has_many :units, dependent: :destroy
-  has_many :deals
+  has_many :deals, dependent: :destroy
   has_many :users, through: :deals
 
   validates :address, :list_price, :annual_property_taxes, :year_built, presence: true
