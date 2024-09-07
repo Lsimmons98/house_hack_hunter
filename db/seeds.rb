@@ -19,5 +19,3 @@ Unit.create!(house: house1, bedrooms: 3, bathrooms: 2, monthly_rent: 1_500.00)
 
 Unit.create!(house: house2, bedrooms: 1, bathrooms: 1, monthly_rent: 1_000.00)
 Unit.create!(house: house2, bedrooms: 3, bathrooms: 2, monthly_rent: 1_700.00)
-
-# You can manually create deals for logged-in users in the app, or adjust the seed data once you have users.

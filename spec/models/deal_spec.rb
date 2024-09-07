@@ -87,7 +87,7 @@ RSpec.describe Deal, type: :model do
     it "calculates the max purchase price based on target return" do
       deal = build(:deal)
       max_price = deal.max_purchase_price(1000, 10)
-      expect(max_price).to be_a(Numeric)
+      expect(max_price).to satisfy { |value| value.is_a?(Numeric) || value == " / Max Purchase Price Too Far From Listing Price: Bad Deal" }
     end
   end
 end

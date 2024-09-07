@@ -82,7 +82,7 @@ class Deal < ApplicationRecord
       end
 
       if iterations >= max_iterations
-        max_purchase_price = 0
+        max_purchase_price = " / Max Purchase Price Too Far From Listing Price: Bad Deal"
         break
       end
     end
