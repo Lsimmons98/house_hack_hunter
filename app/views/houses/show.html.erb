@@ -1,43 +1,55 @@
-<h3><%= @house.address %><br></h3>
-<ul>
-  <li>List Price: $<%= @house.list_price %></li>
-  <li>Year Built: <%= @house.year_built %></li>
-</ul>
+<div class="container my-4">
+  <div class="mb-4">
+    <!-- Link to the Houses Index Page -->
+    <%= link_to "Houses Index Page", houses_path, class: "btn btn-primary mr-2" %>
 
-<h4> Units </h4>
-<% @house.units.each do |unit| %>
-  <ul>
-    <li>Bedrooms: <%=  unit.bedrooms %></li>
-    <li>Bathrooms: <%= unit.bathrooms %></li>
-    <li>Projected Rent: $<%= unit.monthly_rent %></li>
-  </ul>
-<% end %>
-
-<h3> Deal </h3>
-
-<% if @deal.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
-    <ul>
-      <% @deal.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <!-- Link to the Deals Index Page -->
+    <%= link_to "Deals Index Page", deals_path, class: "btn btn-secondary" %>
   </div>
-<% end %>
 
-<%= render '/deals/form' %>
+  <h3><%= @house.address %></h3>
+  <ul class="list-unstyled">
+    <li><strong>List Price:</strong> $<%= @house.list_price %></li>
+    <li><strong>Year Built:</strong> <%= @house.year_built %></li>
+  </ul>
 
-<% if @deal.persisted? %>
+  <h4 class="mt-4">Units</h4>
+  <% @house.units.each do |unit| %>
+    <ul class="list-unstyled">
+      <li><strong>Bedrooms:</strong> <%= unit.bedrooms %></li>
+      <li><strong>Bathrooms:</strong> <%= unit.bathrooms %></li>
+      <li><strong>Projected Rent:</strong> $<%= unit.monthly_rent %></li>
+    </ul>
+  <% end %>
 
-<p>Total Cash Needed: <%= @deal.total_cash_needed%></p>
-<p>Total Income: <%= @deal.total_income %>/month</p>
-<p>Total Expenses: <%= @deal.total_expenses %>/month</p>
-<p>Monthly Payment: <%= @deal.monthly_payment%></p>
+  <h3 class="mt-4">Deal</h3>
 
-<p>Net Operating Income: <%= @deal.net_operating_income %>/month</p>
-<p>Cash Flow: <%= @deal.cash_flow %>/month</p>
-<p>Cash on Cash Return: <%= @deal.cash_on_cash_return %>%</p>
-<p>Max Purchase Price: $<%= @deal.max_purchase_price 1000, 100%></p>
+  <% if @deal.errors.any? %>
+    <div class="alert alert-danger" id="error_explanation">
+      <h4><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h4>
+      <ul>
+        <% @deal.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% end %>
+  <%= render '/deals/form' %>
+
+  <% if @deal.persisted? %>
+    <div class="mt-4">
+      <h4>Deal Summary</h4>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Total Cash Needed:</strong> $<%= @deal.total_cash_needed %></li>
+        <li class="list-group-item"><strong>Total Income:</strong> $<%= @deal.total_income %>/month</li>
+        <li class="list-group-item"><strong>Total Expenses:</strong> $<%= @deal.total_expenses %>/month</li>
+        <li class="list-group-item"><strong>Monthly Payment:</strong> $<%= @deal.monthly_payment %></li>
+        <li class="list-group-item"><strong>Net Operating Income:</strong> $<%= @deal.net_operating_income %>/month</li>
+        <li class="list-group-item"><strong>Cash Flow:</strong> $<%= @deal.cash_flow %>/month</li>
+        <li class="list-group-item"><strong>Cash on Cash Return:</strong> <%= @deal.cash_on_cash_return %>%</li>
+        <li class="list-group-item"><strong>Max Purchase Price:</strong> $<%= @deal.max_purchase_price 1000, 100 %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>
