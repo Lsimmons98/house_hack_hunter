@@ -11,6 +11,10 @@ class Deal < ApplicationRecord
 
   scope :for_user, ->(user_id) { where(user_id: user_id).joins(:house) }
 
+  after_initialize if:  :new_record? do
+    self.down_payment_percentage ||= 3.5
+  end
+
   def total_cash_needed
     calculate_total_cash_needed(purchase_price, purchase_price)
   end

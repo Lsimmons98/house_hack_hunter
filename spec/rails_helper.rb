@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require "view_component/test_helpers"
 require 'factory_bot_rails'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -43,6 +44,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.include ViewComponent::TestHelpers, type: :component
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false

@@ -1,23 +1,23 @@
-  <%= form_with(model: [@house, @deal], local: true) do |f| %>
+  <%= form_with(model: [house, deal], local: true) do |f| %>
 
 <div class="field">
   <%= f.label :interest_rate, "Interest Rate (%)" %>
-  <%= f.number_field :interest_rate,  value: @deal.interest_rate , step: 0.01 %>
+  <%= f.number_field :interest_rate, step: 0.01 %>
 </div>
 
 <div class="field">
   <%= f.label :down_payment_percentage, "Down Payment (%)" %>
-  <%= f.number_field :down_payment_percentage, value: @deal.down_payment_percentage|| 3.5, step: 0.01 %>
+  <%= f.number_field :down_payment_percentage, step: 0.01 %>
 </div>
 
 <div class="field">
   <%= f.label :purchase_price, "Purchase Price" %>
-  <%= f.number_field :purchase_price, value: @deal.purchase_price, step: 0.01 %>
+  <%= f.number_field :purchase_price, step: 0.01 %>
 </div>
 
 <div class="field">
   <%= f.label :loan_term_years, "Loan Term (Years)" %>
-  <%= f.number_field :loan_term_years, value: @deal.loan_term_years|| 30%>
+  <%= f.number_field :loan_term_years, value: deal.loan_term_years|| 30%>
 </div>
 
 <div class="field">

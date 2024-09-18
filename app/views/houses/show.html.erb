@@ -7,20 +7,7 @@
     <%= link_to "Deals Index Page", deals_path, class: "btn btn-secondary" %>
   </div>
 
-  <h3><%= @house.address %></h3>
-  <ul class="list-unstyled">
-    <li><strong>List Price:</strong> $<%= @house.list_price %></li>
-    <li><strong>Year Built:</strong> <%= @house.year_built %></li>
-  </ul>
-
-  <h4 class="mt-4">Units</h4>
-  <% @house.units.each do |unit| %>
-    <ul class="list-unstyled">
-      <li><strong>Bedrooms:</strong> <%= unit.bedrooms %></li>
-      <li><strong>Bathrooms:</strong> <%= unit.bathrooms %></li>
-      <li><strong>Projected Rent:</strong> $<%= unit.monthly_rent %></li>
-    </ul>
-  <% end %>
+  <%= render 'form', house: @house%>
 
   <h3 class="mt-4">Deal</h3>
 
@@ -35,7 +22,18 @@
     </div>
   <% end %>
 
-  <%= render '/deals/form' %>
+    <% if @house.errors.any? %>
+    <div class="alert alert-danger" id="error_explanation">
+      <h4><%= pluralize(@house.errors.count, "error") %> prohibited this house from being saved:</h4>
+      <ul>
+        <% @house.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render '/deals/form', house: @house, deal: @deal %>
 
   <% if @deal.persisted? %>
     <div class="mt-4">

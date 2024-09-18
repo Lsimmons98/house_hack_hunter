@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   get 'homepage', to: 'home#homepage'
   get 'dashboard', to: 'home#dashboard'
 
-  resources :houses do
+  resources :houses, only: [:index, :show, :new, :create, :update] do
     resources :deals, only: [:new, :create, :edit, :update]
   end
-  resources :houses, only: [:index, :show, :new, :create]
 
   resources :deals, only: [:index]
 end
